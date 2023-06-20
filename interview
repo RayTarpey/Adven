@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+//愛德萬
+int main(){
+	//------------------1.bit wise operator------------------
+	//[十六進位位移]
+	//0X12345678 變 0X87654321
+	unsigned int data = 0X12345678;
+	for(int i=0; i<8; i++){
+		data = (data << 4) | (8-i);
+	}
+	printf("after : %04X\n", data);
+	//0X1234 變 0X4321
+	unsigned int data1 = 0X1234;
+	for(int i=0; i<4; i++){
+		data = (data << 4 | 4-i) & 0XFFFF;
+	}
+	cout<<hex<<data<<endl;
+
+	//[十進位位移]
+	int a = 3,b = 4;
+	printf("a=%d, b=%d\n",a<<2,b>>2);
+	
+	//------------------2.strtok------------------
+	char str3[] = "10,--20,30,--40,50";
+	char* tok3 = strtok(str3,"-,");
+	printf("------------\n");
+	while(tok3!=NULL){
+		printf("%s\n",tok3);
+		tok3 = strtok(NULL,",-");//將第一個引數設為 NULL，代表從上次的位置繼續尋找下一個子字串
+	}
+
+	//------------------3.enum------------------
+	enum color{
+		red,
+		blue,
+	};
+	color x = red;
+
+	//------------------4.binary search------------------
+	int arr[] = {1,5,7,8,9,12,13,15,17,19,20,21,21,23,23,23,37,42};
+	int l=0,r=sizeof(arr)/sizeof(int);
+	int target = 23,locate=-1;
+	while(l + 1 < r){
+		int mid = l + (r - l) / 2;
+		if(arr[mid]==target){
+			r = mid;
+		}
+		else if(arr[mid]>target){
+			r = mid;
+		}
+		else{
+			l = mid;
+		}
+	}
+	if(arr[l]==target){
+		locate = l;
+	}
+	if(arr[r]==target){
+		locate = r;
+	}
+	printf("most left locate=%d\n",locate);
+
+	//------------------5.bubble sort------------------
+	int num[]={1,5,3,7,4,9,2};
+	int n = sizeof(num)/sizeof(int);
+	for(int i=n-1; i>0; i--){
+		for(int j=0; j<i; j++){
+			if(num[j]>num[j+1]){
+				int t = num[j];
+				num[j] = num[j+1];
+				num[j+1] = t;
+			}
+		}
+	}
+	for(int i=0; i<n; i++){
+		printf("%d\2",num[i]);
+	}printf("\n");
+	//------------------6.big O------------------
+
+	system("pause");
+    return 0;
+}
